@@ -7,8 +7,11 @@ using namespace std;
 
 class room {
 public:
+  
 
 protected: 
-  map<char*, roo*> exits; 
+  map<char*, room*> exits;
+  char* direction;
+  room neighbor; 
 
 }

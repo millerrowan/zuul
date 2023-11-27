@@ -3,3 +3,10 @@
 #include <cstring>
 
 using namespace std;
+
+class item {
+public:
+
+protected: 
+
+}
