@@ -1,0 +1,16 @@
+#include <iostream>
+#include <cstring>
+#include <room.h> 
+#include <vector>
+//rooms
+
+using namespace std;
+
+room::room(char* description2) {
+
+}
+
+
+//map<char*, room*>
+//"north", out
+//each room will have it's own map 
