@@ -42,13 +42,32 @@ int main() {
   room* forest = new room(); 
 
 
-  
+  //assigning the exits to each room
 
-  while (stillPlaying == true) {
+  char* north = new char[10];
+  strcpy(north, "north");
+  char* south = new char[10];
+  strcpy(south, "south")
+  char* east = new char[10];
+  strcpy(east, "east");
+  char* west = new char[10];
+  strcpy(west, "west");
+  
+  
+  myCell->setExits(north, bullpen);
+  cell3->setExits(east, bullpen);
+  cell2->setExits(west, bullpen);
+
+  bullpen->setExits(west, cell3);
+  bullpen->setExits(east, cell2);
+  bullpen->setExits(south, myCell);
+
+
+  //while (stillPlaying == true) {
        
     
     
-  }
+  //}
 
   return 0;
 }

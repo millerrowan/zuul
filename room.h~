@@ -1,0 +1,20 @@
+#include <iostream>
+#include <cstring>
+#include <vector>
+
+
+using namespace std; 
+
+class room {
+public:
+  room();
+  void setExits(char* direction[10], room* neighbor);
+  void getExitString();
+  void getExits();
+protected: 
+  map<char*, room*> exits;
+  char* direction;
+  room* neighbor; 
+  char* description1[40];
+  char* description2[40];
+};

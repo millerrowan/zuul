@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cstring>
+#include "room.h" 
+#include <vector>
+//rooms
+
+using namespace std;
+
+room::room(char* description1[40], char* description2[40]) {
+  description1 = description2; 
+  map<char*, room*> exits; 
+
+}
+
+void room::setExits(char* direction[10], room* neighbor) {
+  exits.insert(pair<char*, room*>(direction, neighbor));
+}
+
+void room:getExitString() {
+  cout << "Exits" << endl; 
+  for (map<char*, room*>::iterator it = exits->begin(); it != exits->end(); it++) {
+    cout << it->first << " "
+      }
+  cout << endl;
+}
+
+void room::getExits() {
+  for (map<char*, room*>::iterator it = exits->begin(); it != exits->end(); it++) {
+     if(strcmp(it->first, input) == 0) {
+       return it-> second;
+     }
+   return NULL
+     
+     }
+}
+
+//map<char*, room*>
+//"north", out
+//each room will have it's own map 
