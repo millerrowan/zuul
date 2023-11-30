@@ -13,6 +13,10 @@ room::room(char* Description) {
 
 }
 
+void room::printDescription() {
+  cout << description1 << endl; 
+}
+
 void room::setExits(char* direction, room* neighbor) {
   exits.insert(pair<char*, room*>(direction, neighbor));
 }
@@ -35,6 +39,7 @@ room* room::getExits(char* input) {
 }
 
 void room::getItem() {
+
   
 }
 
@@ -48,8 +53,9 @@ void room::removeItems() {
 
 }
 
-void room::getRoomItems() {
+void room::printRoomItems() {
 
+  
 }
 
 //map<char*, room*>

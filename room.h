@@ -21,6 +21,6 @@ protected:
   room* neighbor; 
   char* description1;
   char* items;
-  vector<items*> inventory;
-};
+  vector<items*> roomItems;
+}
 #endif

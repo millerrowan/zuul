@@ -2,36 +2,54 @@
 #include <cstring>
 #include "room.h" 
 #include <vector>
+#include <map>
 //rooms
 
 using namespace std;
 
-room::room(char* description1[40], char* description2[40]) {
-  description1 = description2; 
-  map<char*, room*> exits; 
+room::room(char* Description) {
+  description1 = new char[300];
+  strcpy(description1, Description);
 
 }
 
-void room::setExits(char* direction[10], room* neighbor) {
+void room::setExits(char* direction, room* neighbor) {
   exits.insert(pair<char*, room*>(direction, neighbor));
 }
 
-void room:getExitString() {
+void room::getExitString() {
   cout << "Exits" << endl; 
-  for (map<char*, room*>::iterator it = exits->begin(); it != exits->end(); it++) {
-    cout << it->first << " "
+  for (map<char*, room*>::iterator it = exits.begin(); it != exits.end(); it++) {
+    cout << it->first << " ";
       }
   cout << endl;
 }
 
-void room::getExits() {
-  for (map<char*, room*>::iterator it = exits->begin(); it != exits->end(); it++) {
+room* room::getExits(char* input) {
+  for (map<char*, room*>::iterator it = exits.begin(); it != exits.end(); it++) {
      if(strcmp(it->first, input) == 0) {
        return it-> second;
      }
-   return NULL
-     
-     }
+  }
+  return NULL;
+}
+
+void room::getItem() {
+  
+}
+
+void room::setItems() {
+
+
+}
+
+void room::removeItems() {
+
+
+}
+
+void room::getRoomItems() {
+
 }
 
 //map<char*, room*>

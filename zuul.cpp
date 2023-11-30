@@ -125,11 +125,32 @@ int main() {
   underground->setExits(north, perimeter);
   underground->setExits(west, forest);
 
-				  
+
+  //creating items
+
+  vector<items*> inventory; 
+  
+  item* shovel = new item[10];
+  strcpy(shovel, "shovel");
+  item* key = new item[10];
+  strcpy(key, "key"); 
+  item* wireCutter = new item[10];
+  strcpy(wireCutter, "wire cutter");
+  item* food = new item[10];
+  strcpy(food, "food tray");
+  item* guardSchedule = new item[10];
+  strcpy(guardSchedule, "guard schedule"); 
+  
   bool stillPlaying = true;
-    
+
+  room* currentRoom = myCell; 
+  
   while (stillPlaying == true) {
-       
+    currentRoom->printDescription();
+
+    char input [20];
+
+    cout << 
     
     
   }
