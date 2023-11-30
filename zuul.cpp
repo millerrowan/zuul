@@ -35,11 +35,11 @@ int main() {
   char* L_Description = new char[50];
   strcpy(L_Description, "You are in the library...shhh");
   char* G_Description = new char[60];
-  strcpy(G_Description, "You are in the gym...you need muscle to dig a hole");
+  strcpy(G_Description, "You are in the gym...");
   char* K_Description = new char[70];
   strcpy(K_Description, "You are in the Kitchen...mmmh the delicous smell of sludge");
   char* I_Description = new char[100];
-  strcpy(I_Description, "You are in the infirmirary...hope you don't have to come here often");
+  strcpy(I_Description, "You are in the infirmirary...");
   char* C2_Description = new char[100];
   strcpy(C2_Description, "You are in cell#2...there might be some items hidden in here");
   char* C3_Description = new char[100];
@@ -92,6 +92,7 @@ int main() {
   bullpen->setExits(west, cell3);
   bullpen->setExits(east, cell2);
   bullpen->setExits(south, myCell);
+  bullpen->setExits(north, cafeteria); 
 
   cafeteria->setExits(north, library);
   cafeteria->setExits(south, bullpen);
@@ -125,21 +126,29 @@ int main() {
   underground->setExits(north, perimeter);
   underground->setExits(west, forest);
 
-
+  vector<char*> inventory;
+  
   //creating items
 
-  vector<items*> inventory; 
   
-  item* shovel = new item[10];
+  char* shovel = new char[10];
   strcpy(shovel, "shovel");
-  item* key = new item[10];
+  char* key = new char[10];
   strcpy(key, "key"); 
-  item* wireCutter = new item[10];
-  strcpy(wireCutter, "wire cutter");
-  item* food = new item[10];
-  strcpy(food, "food tray");
-  item* guardSchedule = new item[10];
-  strcpy(guardSchedule, "guard schedule"); 
+  char* wireCutter = new char[15];
+  strcpy(wireCutter, "wire_cutter");
+  char* food = new char[10];
+  strcpy(food, "food_tray");
+  char* guardSchedule = new char[20];
+  strcpy(guardSchedule, "guard_schedule");
+
+  //setting items in room
+
+  guardStation->setItems(shovel);
+  cell3->setItems(wireCutter);
+  wardenOffice->setItems(key);
+  cafeteria->setItems(food);
+  guardStation->setItems(guardSchedule);
   
   bool stillPlaying = true;
 
@@ -150,7 +159,52 @@ int main() {
 
     char input [20];
 
-    cout << 
+    cout << "Type 'go', 'quit', 'help', 'inventory', 'get', 'drop'" << endl;
+
+    cin >> input;
+
+    if(strcmp(input, "go") ==0) {
+	char* directionInput = new char[10]; 
+	currentRoom->getExitString();
+	cout << "go where?" << endl;
+	cin >> directionInput;
+	room* nextRoom = currentRoom->getExits(directionInput);
+	if(nextRoom == NULL) {
+	  cout << "there is no exit there" << endl;
+       
+	}
+	else {
+	  currentRoom = nextRoom;
+	} 
+      }
+      
+    if(strcmp(input, "get") == 0) {
+      currentRoom->printRoomItems();
+      char* itemInput = new char[20];
+      cout << "Which item would you like to pick up" << endl;
+      cin >> itemInput; 
+      currentRoom->getItem(itemInput, inventory);
+      
+      }
+
+    if(strcmp(input, "drop") == 0) {
+
+      }
+
+    if(strcmp(input, "inventory") == 0) {
+      //for(vector<char*>::iteratot
+      }
+    if(strcmp(input, "help") == 0) {
+      cout << " " << endl; 
+      }
+
+     //if user input is quit
+    if(strcmp(input, "quit") == 0) {
+       stillPlaying = false;
+       
+      }
+
+
     
     
   }

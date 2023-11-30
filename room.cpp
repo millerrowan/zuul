@@ -29,35 +29,40 @@ void room::getExitString() {
   cout << endl;
 }
 
-room* room::getExits(char* input) {
+room* room::getExits(char* directionInput) {
   for (map<char*, room*>::iterator it = exits.begin(); it != exits.end(); it++) {
-     if(strcmp(it->first, input) == 0) {
+     if(strcmp(it->first, directionInput) == 0) {
        return it-> second;
      }
   }
   return NULL;
 }
 
-void room::getItem() {
+void room::dropItems() {
 
   
 }
 
-void room::setItems() {
-
+void room::setItems(char* items) {
+  roomItems.push_back(items);
 
 }
 
-void room::removeItems() {
-
+void room::getItem(char* itemInput, vector<char*> &inventory) {
+  for (vector<char*>::iterator it = roomItems.begin(); it != roomItems.end(); it++) {
+    if(strcmp(*it, itemInput) == 0) {
+      inventory.push_back(itemInput); 
+    }
+    else {
+      cout << "item does not exist" << endl; 
+    }
+  }
 
 }
 
 void room::printRoomItems() {
-
+  for(vector<char*>::iterator it = roomItems.begin(); it != roomItems.end(); it++) {
+    cout << "items: " << (*it) << endl; 
+  }
   
-}
-
-//map<char*, room*>
-//"north", out
-//each room will have it's own map 
+} 
