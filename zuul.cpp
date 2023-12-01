@@ -3,16 +3,19 @@
 #include "room.h"
 #include <vector>
 #include <map>
+
+/* Zuul is an adventure game where the user is in map, in this case a prison, and must find the way out
+Author: Rowan Miller
+12/1/23 
+ */ 
+
 //main code
+
 
 using namespace std; 
 
 int main() {
-
-
-  
-  
-  
+  //starting message
   cout << "Welcome to the Davis Correctional Facility" << endl;
   cout << "You were wrongly imprisoned here 4 years ago and now it's time to get out" << endl;
   cout << "Stuck in your cell, you've devised an escape plan..." << endl;
@@ -41,9 +44,9 @@ int main() {
   char* I_Description = new char[100];
   strcpy(I_Description, "You are in the infirmirary...");
   char* C2_Description = new char[100];
-  strcpy(C2_Description, "You are in cell#2...there might be some items hidden in here");
+  strcpy(C2_Description, "You are in cell#2...get out of here before another prisoner sees you");
   char* C3_Description = new char[100];
-  strcpy(C3_Description, "You are in cell#3...get out of here before another prisoner sees you");
+  strcpy(C3_Description, "You are in cell#3...there might be some items hidden in here");
   char* BP_Description = new char[300];
   strcpy(BP_Description, "You are in the bullpen...if you want to get the necessary tools to escape it might be a good idea to check the other prisoners' cells");
   char* UG_Description = new char[300];
@@ -125,10 +128,10 @@ int main() {
   underground->setExits(north, perimeter);
   underground->setExits(west, forest);
 
+  //player inventory
   vector<char*> inventory;
   
   //creating items
-
   
   char* shovel = new char[10];
   strcpy(shovel, "shovel");
@@ -152,10 +155,10 @@ int main() {
   bool stillPlaying = true;
 
   room* currentRoom = myCell; 
-  
+
+  currentRoom->printRoomItems();
+  currentRoom->printDescription();
   while (stillPlaying == true) {
-    currentRoom->printDescription();
-    currentRoom->printRoomItems();
 
     char input [20];
 
@@ -164,6 +167,7 @@ int main() {
     cin >> input;
     cin.ignore();
 
+    //if user inputs go
     if(strcmp(input, "go") ==0) {
 	char* directionInput = new char[10]; 
 	currentRoom->getExitString();
@@ -176,30 +180,37 @@ int main() {
        
 	}
 	else {
+	  //the current room is set to the room the user went into
 	  currentRoom = nextRoom;
-	  /*if(currentRoom == forest) {
+	  //if user finds the forest they have won and the game ends
+	  if(currentRoom == forest) {
 	    cout << "You've Escaped!" << endl;
 	    stillPlaying = false; 
 	  }
 	  else {
 	    stillPlaying = true;
-	    } */ 
+	    } 
 
 	}
+	currentRoom->printDescription();
+	currentRoom->printRoomItems();
     }
-      
+
+    //if user input is get
     if(strcmp(input, "get") == 0) {
       char* itemInput = new char[20];
       cout << "What item would you like to pick up" << endl;
       cin >> itemInput;
       cin.ignore();
       currentRoom->getItem(itemInput, inventory);
+      //if the user picks up the shovel then the exit to the prison is set
       if(strcmp(itemInput, shovel) == 0) {
 	perimeter->setExits(south, underground);
 	cout << "You can dig out of this place now" << endl;
        }
     }
-
+    
+    //if user input is drop
     if(strcmp(input, "drop") == 0) {
       char* dropItemInput = new char[20];
       cout << "Which item would you like to drop?" << endl;
@@ -208,7 +219,9 @@ int main() {
       currentRoom->dropItems(dropItemInput, inventory);
       }
 
+    //if user input is inventory
     if(strcmp(input, "inventory") == 0) {
+      //prints out inventory
       cout << "inventory: "; 
       for(vector<char*>::iterator it = inventory.begin(); it != inventory.end(); it++) {
 	cout << (*it) << " "; 
@@ -216,7 +229,7 @@ int main() {
       cout << endl; 
       }
 
-    
+    //if user input is help
     if(strcmp(input, "help") == 0) {
       cout << "explore the rooms for the shovel to escape" << endl;
     }

@@ -10,6 +10,7 @@ using namespace std;
 
 class room {
 public:
+  //all methods in room
   room(char* Description);
   void setExits(char* direction, room* neighbor);
   void getExitString();
@@ -19,7 +20,8 @@ public:
   void dropItems(char* dropItemInput, vector<char*> &inventory);
   void printRoomItems();
   void printDescription(); 
-protected: 
+protected:
+  //variables in room
   map<char*, room*> exits;
   char* direction;
   room* neighbor; 
