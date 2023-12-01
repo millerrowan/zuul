@@ -162,12 +162,14 @@ int main() {
     cout << "Type 'go', 'quit', 'help', 'inventory', 'get', 'drop'" << endl;
 
     cin >> input;
+    cin.ignore();
 
     if(strcmp(input, "go") ==0) {
 	char* directionInput = new char[10]; 
 	currentRoom->getExitString();
 	cout << "go where?" << endl;
 	cin >> directionInput;
+	cin.ignore();
 	room* nextRoom = currentRoom->getExits(directionInput);
 	if(nextRoom == NULL) {
 	  cout << "there is no exit there" << endl;
@@ -189,7 +191,8 @@ int main() {
     if(strcmp(input, "get") == 0) {
       char* itemInput = new char[20];
       cout << "What item would you like to pick up" << endl;
-      cin >> itemInput; 
+      cin >> itemInput;
+      cin.ignore();
       currentRoom->getItem(itemInput, inventory);
       if(strcmp(itemInput, shovel) == 0) {
 	perimeter->setExits(south, underground);
@@ -200,7 +203,8 @@ int main() {
     if(strcmp(input, "drop") == 0) {
       char* dropItemInput = new char[20];
       cout << "Which item would you like to drop?" << endl;
-      cin >> dropItemInput; 
+      cin >> dropItemInput;
+      cin.ignore();
       currentRoom->dropItems(dropItemInput, inventory);
       }
 
@@ -214,7 +218,7 @@ int main() {
 
     
     if(strcmp(input, "help") == 0) {
-      cout << " " << endl;
+      cout << "explore the rooms for the shovel to escape" << endl;
     }
 
      //if user input is quit
