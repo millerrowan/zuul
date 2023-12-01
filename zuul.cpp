@@ -121,7 +121,6 @@ int main() {
   guardStation->setExits(north, prisonYard);
 
   perimeter->setExits(east, prisonYard);
-  perimeter->setExits(south, underground);
 
   underground->setExits(north, perimeter);
   underground->setExits(west, forest);
@@ -156,6 +155,7 @@ int main() {
   
   while (stillPlaying == true) {
     currentRoom->printDescription();
+    currentRoom->printRoomItems();
 
     char input [20];
 
@@ -175,39 +175,54 @@ int main() {
 	}
 	else {
 	  currentRoom = nextRoom;
-	} 
-      }
+	  /*if(currentRoom == forest) {
+	    cout << "You've Escaped!" << endl;
+	    stillPlaying = false; 
+	  }
+	  else {
+	    stillPlaying = true;
+	    } */ 
+
+	}
+    }
       
     if(strcmp(input, "get") == 0) {
-      currentRoom->printRoomItems();
       char* itemInput = new char[20];
-      cout << "Which item would you like to pick up" << endl;
+      cout << "What item would you like to pick up" << endl;
       cin >> itemInput; 
       currentRoom->getItem(itemInput, inventory);
-      
-      }
+      if(strcmp(itemInput, shovel) == 0) {
+	perimeter->setExits(south, underground);
+	cout << "You can dig out of this place now" << endl;
+       }
+    }
 
     if(strcmp(input, "drop") == 0) {
-
+      char* dropItemInput = new char[20];
+      cout << "Which item would you like to drop?" << endl;
+      cin >> dropItemInput; 
+      currentRoom->dropItems(dropItemInput, inventory);
       }
 
     if(strcmp(input, "inventory") == 0) {
-      //for(vector<char*>::iteratot
+      cout << "inventory: "; 
+      for(vector<char*>::iterator it = inventory.begin(); it != inventory.end(); it++) {
+	cout << (*it) << " "; 
       }
+      cout << endl; 
+      }
+
+    
     if(strcmp(input, "help") == 0) {
-      cout << " " << endl; 
-      }
+      cout << " " << endl;
+    }
 
      //if user input is quit
     if(strcmp(input, "quit") == 0) {
        stillPlaying = false;
        
-      }
+    }   
 
-
-    
-    
   }
-
   return 0;
 }

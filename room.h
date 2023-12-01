@@ -16,7 +16,7 @@ public:
   room* getExits(char* directionInput);
   void getItem(char* itemInput, vector<char*> &inventory);
   void setItems(char* items);
-  void dropItems();
+  void dropItems(char* dropItemInput, vector<char*> &inventory);
   void printRoomItems();
   void printDescription(); 
 protected: 
@@ -28,5 +28,6 @@ protected:
   char* items;
   vector<char*> roomItems;
   char* itemInput;
+  char* dropItemInput;
 };
 #endif

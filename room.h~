@@ -13,14 +13,20 @@ public:
   room(char* Description);
   void setExits(char* direction, room* neighbor);
   void getExitString();
-  room* getExits(char* input);
-  char* input; 
+  room* getExits(char* directionInput);
+  void getItem(char* itemInput, vector<char*> &inventory);
+  void setItems(char* items);
+  void dropItems();
+  void printRoomItems();
+  void printDescription(); 
 protected: 
   map<char*, room*> exits;
   char* direction;
   room* neighbor; 
   char* description1;
+  char* directionInput; 
   char* items;
-  vector<items*> inventory;
+  vector<char*> roomItems;
+  char* itemInput;
 };
 #endif

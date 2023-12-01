@@ -38,9 +38,17 @@ room* room::getExits(char* directionInput) {
   return NULL;
 }
 
-void room::dropItems() {
+void room::dropItems(char* dropItemInput, vector<char*> &inventory) {
+  for(vector<char*>::iterator it = inventory.begin(); it != inventory.end(); it++) {
+    if(strcmp(dropItemInput, (*it)) == 0) {
+		roomItems.push_back(dropItemInput);
+		inventory.erase(it); 
+	}
+    else {
+	cout << "that item is not in your inventory" << endl; 
+	}
+  }
 
-  
 }
 
 void room::setItems(char* items) {
@@ -51,7 +59,8 @@ void room::setItems(char* items) {
 void room::getItem(char* itemInput, vector<char*> &inventory) {
   for (vector<char*>::iterator it = roomItems.begin(); it != roomItems.end(); it++) {
     if(strcmp(*it, itemInput) == 0) {
-      inventory.push_back(itemInput); 
+      inventory.push_back(itemInput);
+      roomItems.erase(it);
     }
     else {
       cout << "item does not exist" << endl; 
@@ -61,8 +70,10 @@ void room::getItem(char* itemInput, vector<char*> &inventory) {
 }
 
 void room::printRoomItems() {
+  cout << "room items: ";
   for(vector<char*>::iterator it = roomItems.begin(); it != roomItems.end(); it++) {
-    cout << "items: " << (*it) << endl; 
+    cout << (*it) << " ";
   }
+  cout << endl;
   
 } 
